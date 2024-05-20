@@ -103,6 +103,14 @@ class Laporan extends CI_Controller
         $dompdf->stream("laporan_data_anggota.pdf", array('Attachment' => 0));
         // nama file pdf yang dihasilkan
     }
+    public function export_excel_anggota() 
+    { 
+        $data = array( 'title' => 'Laporan Data Anggota', 
+        'laporan' => $this->db->query("select * from user u,nama n, 
+        email e,role_id r where u.id_user=u.id and n.nama=n.nama
+        and e.email=e.email and r.role_id=r.id")->result_array()); 
+        $this->load->view('user/export_excel_anggota',$data);
+    }
     public function laporan_pinjam() 
     { 
         $data['judul'] = 'Laporan Data Peminjaman'; 
@@ -153,7 +161,7 @@ class Laporan extends CI_Controller
         buku b,user u where d.id_buku=b.id and p.id_user=u.id 
         and p.no_pinjam=d.no_pinjam")->result_array()); 
         $this->load->view('pinjam/export_excel_pinjam',$data);
-        }
-
     }
+
+}
 
