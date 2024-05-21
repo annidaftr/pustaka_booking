@@ -12,7 +12,7 @@
 
     .table-data tr th,
     .table-data tr td {
-        border: 1px solid black;
+        border: 3px solid black;
         font-size: 11pt;
         font-family: Verdana;
         padding: 10px;

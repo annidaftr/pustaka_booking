@@ -82,6 +82,7 @@ class Laporan extends CI_Controller
     }
     public function laporan_anggota_pdf()
     {
+        $this->db->where('role_id', 2);
         $data['anggota'] = $this->db->get('user')->result_array();
         // $this->load->library('dompdf_gen');
         $sroot = $_SERVER['DOCUMENT_ROOT'];
@@ -105,12 +106,13 @@ class Laporan extends CI_Controller
     }
     public function export_excel_anggota() 
     { 
-        $data = array( 'title' => 'Laporan Data Anggota', 
-        'laporan' => $this->db->query("select * from user u,nama n, 
-        email e,role_id r where u.id_user=u.id and n.nama=n.nama
-        and e.email=e.email and r.role_id=r.id")->result_array()); 
-        $this->load->view('user/export_excel_anggota',$data);
+        $data = array( 
+            'judul' => 'Laporan Data Anggota', 
+            'laporan' => $this->db->query("SELECT * FROM user WHERE role_id = 2")->result_array()
+        ); 
+        $this->load->view('user/export_excel_anggota', $data);
     }
+
     public function laporan_pinjam() 
     { 
         $data['judul'] = 'Laporan Data Peminjaman'; 
